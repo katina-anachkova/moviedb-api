@@ -6,7 +6,6 @@ const preload = require('../middlewares/preload');
 
 
 router.get('/', async (req, res) => {
-    // console.log(req.user);
     const data = await api.getAll();
     res.json(data);
 });
@@ -16,7 +15,6 @@ router.post('/', isAuth(), async (req, res) => {
         title: req.body.title,
         description: req.body.description,
         image: req.body.image,
-        // rating: req.body.rating,
         owner: req.user._id
     };
 
@@ -41,7 +39,6 @@ router.put('/:id', preload(), isOwner(), async (req, res) => {
         title: req.body.title,
         description: req.body.description,
         image: req.body.image,
-        // rating: req.body.rating,
         owner: req.user._id
     };
 
@@ -66,5 +63,6 @@ router.delete('/:id', preload(), isOwner(), async (req, res) => {
         res.status(400).json({ message: error });
     }
 });
+
 
 module.exports = router;

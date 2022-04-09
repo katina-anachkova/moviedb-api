@@ -1,8 +1,12 @@
 const Item = require('../models/Item');
-
+const Favourite = require('../models/Favourite');
 
 async function getAll() {
     return Item.find({});
+}
+
+async function getAllFavourites() {
+    return Favourite.find({});
 }
 
 async function create(item) {
@@ -17,6 +21,7 @@ function getById(id) {
 }
 
 async function update(id, item) {
+
     const existing = await Item.findById(id);
 
     existing.title = item.title;
@@ -32,11 +37,20 @@ async function deleteById(id) {
     await Item.findByIdAndDelete(id);
 }
 
+async function addFavourite(fav) {
+    const result = new Favourite(fav);
+    
+    await result.save();
+
+    return result;
+}
 
 module.exports = {
     getAll,
     create,
     getById,
     update,
-    deleteById
+    deleteById,
+    addFavourite,
+    getAllFavourites
 };
