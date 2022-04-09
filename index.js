@@ -26,7 +26,7 @@ async function start() {
     app.use(cors());
     app.use(auth());
     app.use('/data/catalog', catalogController);
-    app.use('/data/likes', favouritesController);
+    app.use('/data/favourites', favouritesController);
     app.use('/users', usersController);
 
     app.get('/', (req, res) => res.json({ message: 'REST service operational'}));

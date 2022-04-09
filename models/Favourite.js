@@ -1,10 +1,10 @@
 const { model, Schema, Types: { ObjectId } } = require('mongoose');
 
 const schema = new Schema({
-    movie: { type: ObjectId, ref: 'Item' },
+    movie: { type: Object },
     owner: { type: ObjectId, ref: 'User' },
 });
 
-const Like = model('Like', schema);
+const Favourite = model('Favourite', schema);
 
-module.exports = Like;
+module.exports = Favourite;

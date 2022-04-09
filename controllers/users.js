@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { isGuest } = require('../middlewares/guards');
-const { register, login, logout } = require('../services/users');
+const { register, login, logout, getAllUsers } = require('../services/users');
 const mapErrors = require('../utils/mapper');
 
 router.post('/register', isGuest(), async (req, res) => {
@@ -21,7 +21,6 @@ router.post('/register', isGuest(), async (req, res) => {
 router.post('/login', isGuest(), async (req, res) => {
     try {
         const result = await login(req.body.email.toLowerCase(), req.body.password);
-        console.log(req.body.password)
         res.json(result);
     } catch (err) {
         console.error(err.message);

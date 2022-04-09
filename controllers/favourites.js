@@ -9,11 +9,12 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', isAuth(), async (req, res) => {
-    const movieId = req.params.id;
+
+    // const movieId = req.params.id;
 
     const favourite = {
-        movie: movieId,
-        owner: req.user._id
+        movie: req.body.movie,
+        owner: req.body.owner
     };
 
     try {

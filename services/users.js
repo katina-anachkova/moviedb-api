@@ -24,7 +24,7 @@ async function register(email, password) {
 }
 
 async function login(email, password) {
-    
+
     const user = await User.findOne({ email: new RegExp(`^${email}$`, 'i') });
 
     if (!user) {
@@ -59,9 +59,9 @@ function verifySession(token) {
     if (blacklist.includes(token)) {
         throw new Error('Token is invalidated');
     }
-    
+
     const payload = jwt.verify(token, JWT_SECRET);
-    
+
     return {
         email: payload.email,
         _id: payload._id,
@@ -73,5 +73,5 @@ module.exports = {
     register,
     login,
     logout,
-    verifySession
+    verifySession,
 };
