@@ -13,7 +13,7 @@ router.post('/', isAuth(), async (req, res) => {
     // const movieId = req.params.id;
 
     const favourite = {
-        movie: req.body.movie,
+        movie: req.body.favMovie,
         owner: req.body.owner
     };
 

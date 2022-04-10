@@ -1,5 +1,6 @@
 const Item = require('../models/Item');
 const Favourite = require('../models/Favourite');
+const User = require('../models/User');
 
 async function getAll() {
     return Item.find({});
@@ -7,6 +8,19 @@ async function getAll() {
 
 async function getAllFavourites() {
     return Favourite.find({});
+}
+
+async function addFavourite(fav) {
+    const result = new Favourite(fav);
+    const user = await User.findOne({ id: fav.owner });
+
+    // user['favMovies'].push(fav.movie);
+
+    // await user.save();
+
+    await result.save();
+
+    return result;
 }
 
 async function create(item) {
@@ -35,14 +49,6 @@ async function update(id, item) {
 
 async function deleteById(id) {
     await Item.findByIdAndDelete(id);
-}
-
-async function addFavourite(fav) {
-    const result = new Favourite(fav);
-    
-    await result.save();
-
-    return result;
 }
 
 module.exports = {

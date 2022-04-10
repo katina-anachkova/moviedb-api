@@ -6,6 +6,16 @@ const User = require('../models/User');
 const JWT_SECRET = 'asoiducan93284c9rew';
 const blacklist = [];
 
+async function getAllUsers() {
+    const users = await User.find();
+    return users
+}
+
+// async function updateUser (user, body) { // TODO -> retrieve user and update
+//     const user = await User.findOneAndUpdate(user, body);
+//     return user;
+// }
+
 async function register(email, password) {
     const existing = await User.findOne({ email: new RegExp(`^${email}$`, 'i') });
 
@@ -74,4 +84,6 @@ module.exports = {
     login,
     logout,
     verifySession,
+    getAllUsers,
+    // updateUser
 };
