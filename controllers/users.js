@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { isGuest } = require('../middlewares/guards');
-const { register, login, logout, getAllUsers, getUserById } = require('../services/users');
+const { register, login, logout, getAllUsers, updateUser } = require('../services/users');
 const mapErrors = require('../utils/mapper');
 
 router.post('/register', isGuest(), async (req, res) => {
@@ -42,6 +42,21 @@ router.get('/', async (req, res) => {
     // res.status(204).end();
 });
  
-// router.put('/') TODO -> update user so favMovies persist
+router.put('/:id', async (req,res) => {//TODO -> update user so favMovies persist -> patch
+    const userId = req.params.id;//userId
+    const user = {
+        // email: req.body.email,
+        favMovies: req.body.favMovies
+    };
+
+    try {
+        const result = await updateUser(userId, user);
+        res.json(result);
+    } catch (err) {
+        console.error(err.message);
+        const error = mapErrors(err);
+        res.status(400).json({ message: error });
+    }
+})
 
 module.exports = router;

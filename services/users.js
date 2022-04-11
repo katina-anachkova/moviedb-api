@@ -8,13 +8,20 @@ const blacklist = [];
 
 async function getAllUsers() {
     const users = await User.find();
+    console.log(users, "users")
     return users
 }
 
-// async function updateUser (user, body) { // TODO -> retrieve user and update
-//     const user = await User.findOneAndUpdate(user, body);
-//     return user;
-// }
+async function updateUser(userId, user) {
+
+    const existing = await User.findById(userId);
+
+    existing.favMovies = user.favMovies;
+
+    await existing.save();
+
+    return existing;
+}
 
 async function register(email, password) {
     const existing = await User.findOne({ email: new RegExp(`^${email}$`, 'i') });
@@ -85,5 +92,5 @@ module.exports = {
     logout,
     verifySession,
     getAllUsers,
-    // updateUser
+    updateUser
 };
