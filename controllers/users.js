@@ -38,14 +38,11 @@ router.get('/', async (req, res) => {
         const error = mapErrors(err);
         res.status(400).json({ message: error });
     }
-    // logout(req.user?.token);
-    // res.status(204).end();
 });
  
-router.put('/:id', async (req,res) => {//TODO -> update user so favMovies persist -> patch
-    const userId = req.params.id;//userId
+router.put('/:id', async (req,res) => {
+    const userId = req.params.id;
     const user = {
-        // email: req.body.email,
         favMovies: req.body.favMovies
     };
 

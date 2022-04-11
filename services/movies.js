@@ -13,11 +13,7 @@ async function getAllFavourites() {
 async function addFavourite(fav) {
     const result = new Favourite(fav);
     const user = await User.findOne({ id: fav.owner });
-
-    // user['favMovies'].push(fav.movie);
-
-    // await user.save();
-
+    
     await result.save();
 
     return result;
